@@ -31,7 +31,6 @@ class CG{
 
 		void RenderFromFile(string file_name);
 
-
 	private:
 		SDL_Window* displayWindow;
 		SDL_Renderer* displayRenderer;

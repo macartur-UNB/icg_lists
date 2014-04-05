@@ -61,7 +61,7 @@ class Line{
 
 class Triangle{
 	public:
-	Triangle(Dot d1,Dot d2,Dot d3,float red=0,float green=0,float blue=0){
+	Triangle(Dot d1=0,Dot d2=0,Dot d3=0,float red=0,float green=0,float blue=0){
 		this->d1 = d1;
 		this->d2 = d2;
 		this->d3 = d3;
@@ -103,7 +103,7 @@ class Triangle{
 
 class Quad{
 	public:
-	Quad(Dot d1,Dot d2, Dot d3, Dot d4,float red=0,float green=0,float blue=0){
+	Quad(Dot d1=0,Dot d2=0, Dot d3=0, Dot d4=0,float red=0,float green=0,float blue=0){
 		this->d1 = d1;
 		this->d2 = d2;
 		this->d3 = d3;

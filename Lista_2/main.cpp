@@ -12,7 +12,9 @@ int main(){
 	
 	window.Init_Render();
 
-	window.RenderFromFile("line_input.txt");
+//	window.RenderFromFile("line_input.txt");
+		window.RenderFromFile("triangle_and_quad_input.txt");
+
 	window.Display_Render();
 	window.Delay(2000);
 

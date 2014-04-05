@@ -132,11 +132,15 @@ CG::Display_Render()
 
 void
 CG::RenderFromFile(string file_name){
-	string line;
+	string line,buffer;
+	float x,y,z;
+	int n,m,o,p,k,l,j;
+
+
 	Dot * dot = new Dot[5];
 	Line * vertex = new Line[8];	
-	float x,y,z;
-	int n,m,k,l,j;
+	Triangle * triangle = new Triangle[4];
+
 
 	ifstream input (file_name.c_str());
 
@@ -149,25 +153,44 @@ CG::RenderFromFile(string file_name){
 			istringstream iss(line);
 			iss >> x >> y  >> z;
 			dot[i] = Dot(x,y,z);		
-			cout << line << endl;	
 		}
 			
 		getline(input,line);
+		istringstream iss(line);
+		iss>> buffer;
 		getline(input,line);
 
-		for(int i=0;i<8;i++){
-			getline(input,line);
-			cout << line << endl;
-			istringstream iss(line);
-			iss >> n >> m  >> k >> l >> j;
-			vertex[i] = Line(dot[n-1],dot[m-1],k,l,j);  
-			this->DrawLine(vertex[i]);
+		if(buffer == "line"){	
+			//read a line and render
+			for(int i=0;i<8;i++){
+				getline(input,line);
+				cout << line << endl;
+				istringstream iss(line);
+				iss >> n >> m  >> k >> l >> j;
+				vertex[i] = Line(dot[n-1],dot[m-1],k,l,j);  
+				this->DrawLine(vertex[i]);
+			}
+			input.close();
+		}else{
+			//read a triangle and render
+			for(int i=0;i<4;i++){
+					getline(input,line);
+					istringstream iss(line);
+					iss >> n >> m >> o >> k >> l >> j;	
+					triangle[i] = Triangle(dot[n-1],dot[m-1],dot[o],k,l,j);	
+					this->DrawTriangle(triangle[i]);
+			}
+			//read a quad and render
+  		getline(input,line);
+    	istringstream iss(line);
+    	iss>> n >> m >>o >> p >> k >>l >>j;
+			Quad quad = Quad(dot[n-1],dot[m-1],dot[o-1],dot[p],k,l,j); 
+			this->DrawQuad(quad);
+			input.close();
 		}
-		input.close();
 	}else{
 		cout << "Unable to open file"<<endl;
-	}
-	
+	}	
 }
 
 
