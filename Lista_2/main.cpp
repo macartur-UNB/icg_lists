@@ -4,17 +4,18 @@
 
 using namespace std;
 
-int main(){
+int main(int  argc,char *argv[]){
+
+	if(argc == 1){
+		cout << "The input is: ./prog file_name.txt "<<endl;
+		exit(-1);
+	}
 	
-	//cria uma estrutura usando o CG , para criar a janela e o viewport
 	CG window;
 	window.Display_SetViewport(800,600);
 	
 	window.Init_Render();
-
-//	window.RenderFromFile("line_input.txt");
-		window.RenderFromFile("triangle_and_quad_input.txt");
-
+	window.RenderFromFile(argv[1]);
 	window.Display_Render();
 	window.Delay(2000);
 

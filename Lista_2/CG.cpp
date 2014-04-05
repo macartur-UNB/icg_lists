@@ -132,62 +132,43 @@ CG::Display_Render()
 
 void
 CG::RenderFromFile(string file_name){
-	string line,buffer;
+	string line;
 	float x,y,z;
 	int n,m,o,p,k,l,j;
-
-
+	int idots=0,ivertex=0,itriangle=0;
+	char buffer;
 	Dot * dot = new Dot[5];
 	Line * vertex = new Line[8];	
 	Triangle * triangle = new Triangle[4];
-
-
+	
 	ifstream input (file_name.c_str());
 
 	if(input.is_open()){
-		getline(input,line);
-		getline(input,line);
-			
-		for(int i=0;i<5;i++)	{		
-			getline(input,line);
-			istringstream iss(line);
-			iss >> x >> y  >> z;
-			dot[i] = Dot(x,y,z);		
-		}
-			
-		getline(input,line);
-		istringstream iss(line);
-		iss>> buffer;
-		getline(input,line);
 
-		if(buffer == "line"){	
-			//read a line and render
-			for(int i=0;i<8;i++){
-				getline(input,line);
-				cout << line << endl;
-				istringstream iss(line);
-				iss >> n >> m  >> k >> l >> j;
-				vertex[i] = Line(dot[n-1],dot[m-1],k,l,j);  
-				this->DrawLine(vertex[i]);
+		while(getline(input,line)){
+			istringstream iss(line);
+			if(line[0] == 'd'){
+				iss >> buffer  >>  x >> y  >> z;
+				dot[idots] = Dot(x,y,z);
+				idots++;		
+			}else if(line[0]== 'l'){
+				iss >>buffer >>n >> m  >> k >> l >> j;
+				vertex[ivertex] = Line(dot[n-1],dot[m-1],k,l,j);  
+				this->DrawLine(vertex[ivertex]);
+				ivertex++;
+			}else if(line[0] == 't'){
+				iss >> buffer >>n >> m >> o >> k >> l >> j;	
+				triangle[itriangle] = Triangle(dot[n-1],dot[m-1],dot[o-1],k,l,j);	
+				this->DrawTriangle(triangle[itriangle]);
+				itriangle++;
+			}else if(line[0] == 'q'){
+    		iss>> buffer >>n >> m >> o >> p >> k >>l >>j;
+				Quad quad = Quad(dot[n-1],dot[m-1],dot[o-1],dot[p-1],k,l,j); 
+				this->DrawQuad(quad);
 			}
-			input.close();
-		}else{
-			//read a triangle and render
-			for(int i=0;i<4;i++){
-					getline(input,line);
-					istringstream iss(line);
-					iss >> n >> m >> o >> k >> l >> j;	
-					triangle[i] = Triangle(dot[n-1],dot[m-1],dot[o-1],k,l,j);	
-					this->DrawTriangle(triangle[i]);
-			}
-			//read a quad and render
-  		getline(input,line);
-    	istringstream iss(line);
-    	iss>> n >> m >>o >> p >> k >>l >>j;
-			Quad quad = Quad(dot[n-1],dot[m-1],dot[o-1],dot[p-1],k,l,j); 
-			this->DrawQuad(quad);
-			input.close();
+		
 		}
+		input.close();
 	}else{
 		cout << "Unable to open file"<<endl;
 	}	
