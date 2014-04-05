@@ -177,14 +177,14 @@ CG::RenderFromFile(string file_name){
 					getline(input,line);
 					istringstream iss(line);
 					iss >> n >> m >> o >> k >> l >> j;	
-					triangle[i] = Triangle(dot[n-1],dot[m-1],dot[o],k,l,j);	
+					triangle[i] = Triangle(dot[n-1],dot[m-1],dot[o-1],k,l,j);	
 					this->DrawTriangle(triangle[i]);
 			}
 			//read a quad and render
   		getline(input,line);
     	istringstream iss(line);
     	iss>> n >> m >>o >> p >> k >>l >>j;
-			Quad quad = Quad(dot[n-1],dot[m-1],dot[o-1],dot[p],k,l,j); 
+			Quad quad = Quad(dot[n-1],dot[m-1],dot[o-1],dot[p-1],k,l,j); 
 			this->DrawQuad(quad);
 			input.close();
 		}
