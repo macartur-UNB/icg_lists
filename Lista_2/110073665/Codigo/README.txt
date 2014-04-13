@@ -1,12 +1,29 @@
+LISTA 2
+==================================================
+Aluno	Macártur de Sousa Carvalho	
+			11/0073665
+
+ARQUIVOS
+==================================================
+CG.h
+CG.cpp
+Makefile
+main.cpp
+vec.h
+piramide_com_linha.txt
+piramide_com_poligono.txt
+
+
 
 COMPILACAO
 =================
 
-Existem um makefile para realizar toda a compilacao, sendo assim para executar a compilacao deve-se usar o comando:
+Existem um makefile para realizar toda a compilacao, sendo assim para executar a compilacao deve-se usar o comando no diretorio do Makefile:
 
 $ make
 
 Para apagar o arquivo prog gerado pode-se utilizar o comando:
+
 $ make clean
 
 EXECUCAO
@@ -14,7 +31,7 @@ EXECUCAO
 
 Para executar o progama em um arquivo deve-se somente utilizar a linha de comando:
 
-$ ./prog <nome_do_arquivo>
+$ ./prog <nome_do_arquivo_de_entrada>
 
 
 FORMATO DE ARQUIVO
