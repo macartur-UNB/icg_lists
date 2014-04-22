@@ -1,5 +1,5 @@
 
-flags = -W -Wall -pedantic -ansi -lSDL2 -lGLU -lGL
+flags = -W -Wall -pedantic -ansi -lSDL2 -lGLU -lGL -lGLEW
 files = CG.cpp main.cpp Mesh.cpp 
 
 all:

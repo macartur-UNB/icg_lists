@@ -1,7 +1,4 @@
 #include "CG.h"
-#include <sstream>
-#include <iostream>
-#include <fstream>
 
 using namespace std;
 
@@ -41,26 +38,8 @@ CG::Display_InitGL()
 int 
 CG::Display_SetViewport( int width, int height )
 {
-
-    GLfloat ratio;
-
-    if ( height == 0 ) {
-        height = 1;
-    }
-
-    ratio = ( GLfloat )width / ( GLfloat )height;
-
-    glViewport( 0, 0, ( GLsizei )width, ( GLsizei )height );
-
-    glMatrixMode( GL_PROJECTION );
-    glLoadIdentity( );
-
-    gluPerspective( 45.0f, ratio, 0.1f, 100.0f );
-
-    glMatrixMode( GL_MODELVIEW );
-
-    glLoadIdentity( );
-
+    if ( height == 0 )  height = 1;
+		glViewport( 0, 0, ( GLsizei )width, ( GLsizei )height );
     return 1;
 }
 
@@ -68,8 +47,6 @@ void
 CG::Init_Render(){
 		glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-    glLoadIdentity();
-    glTranslatef( -1.5f, 0.0f, -6.0f );
 }
 
 void 
